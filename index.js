@@ -33,12 +33,13 @@ server.get('/api/users/:id', (req,res) => {
     }
 });
 
-server.delete("/api/users/:id", (req, res) => {
-    if (!req.params.id)
-      res.status(400).send("Your request is missing the id");
-    users = users.filter(user => `${user.id}` !== req.params.id);
-    res.status(202).send(req.params.id);
-  });
+//does not work
+// server.delete("/api/users/:id", (req, res) => {
+//     if (!req.params.id)
+//       res.status(400).send("Your request is missing the id");
+//     users = users.filter(user => `${user.id}` !== req.params.id);
+//     res.status(202).send(req.params.id);
+//   });
 
 const PORT = 5000;
 server.listen(PORT, () =>
