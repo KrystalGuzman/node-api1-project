@@ -46,17 +46,35 @@ server.get('/api/users/:id', (req,res) => {
     }
 });
 
-// does not work
 server.delete("/api/users/:id", (req, res) => {
     const id = req.params.id;
     const user = users.filter(user => user.id == id);
-    if (user){
-        users = users.filter(user => user.id !==id);
-        res.status(200).json({message: `Deleted User ${id}`});
-    } else{
-      res.status(404).json({message: "The user with the specified ID does not exist."});
+    if (user) {
+      users = users.filter(user => user.id !== id);
+      res.status(200).json({ message: "User deleted" })
+    } else {
+        res.status(404).json({ message: "The user with the specified ID does not exist." })
     }
   });
+  
+  server.put("/api/users/:id", (req, res) => {
+    const id = req.params.id;
+    const userUpdate = req.body;
+    const index = users.findIndex(user => user.id == id);
+    if (index) {
+      const oldUser = users[index];
+      const newUser = {
+        id: userUpdate.id || oldUser.id,
+        name: userUpdate.name || oldUser.name,
+        bio: userUpdate.bio || oldUser.bio
+      };
+      users[index] = newUser;
+      res.status(200).json(userData);
+    } else {
+        res.status(404).json({ errorMessage: "The user with the specified ID does not exist." })
+    }
+  });
+
 
 const PORT = 5000;
 server.listen(PORT, () =>

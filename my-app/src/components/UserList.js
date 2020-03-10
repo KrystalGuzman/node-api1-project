@@ -2,17 +2,21 @@ import React, { useState } from "react";
 import axios from "axios";
 
 const initialUser = {
-  user: ""
+  name: "",
+  bio: "",
+  id:""
 };
 
 const UserList = ({ users, updateUsers }) => {
-  console.log(users);
+  console.log("users",users);
   const [editing, setEditing] = useState(false);
   const [userToEdit, setUserToEdit] = useState(initialUser);
   const [userToDelete, setUserToDelete] = useState();
   const [adding, setAdding] = useState(false);
   const [userToAdd, setUserToAdd] = useState({
-    user: ''
+    name: "",
+    bio: "",
+    id: ""
   });
 
   const addUser = e => {
@@ -66,7 +70,7 @@ const UserList = ({ users, updateUsers }) => {
       <p>users</p>
       <ul>
         {users.map(user => (
-          <li key={user.user} onClick={() => editUser(user)}>
+          <li key={user.name} onClick={() => editUser(user)}>
             <span>
               <span className="delete" onClick={e => {
                     e.stopPropagation();
@@ -75,7 +79,7 @@ const UserList = ({ users, updateUsers }) => {
                 }>
                   x
               </span>{" "}
-              {user.user}
+              {user.name}
             </span>
             <div
               className="user-box"
@@ -90,9 +94,21 @@ const UserList = ({ users, updateUsers }) => {
             name:
             <input
               onChange={e =>
-                setUserToEdit({ ...userToEdit, user: e.target.value })
+                setUserToEdit({ ...userToEdit, name: e.target.value })
               }
-              value={userToEdit.user}
+              value={userToEdit.name}
+            />
+          </label>
+          <label>
+            bio:
+            <input
+              onChange={e =>
+                setUserToEdit({
+                  ...userToEdit,
+                  bio: e.target.value
+                })
+              }
+              value={userToEdit.code.hex}
             />
           </label>
           <div className="button-row">
@@ -109,9 +125,21 @@ const UserList = ({ users, updateUsers }) => {
             name:
             <input
               onChange={e =>
-                setUserToAdd({ ...userToAdd, user: e.target.value })
+                setUserToAdd({ ...userToAdd, name: e.target.value })
               }
-              value={userToAdd.user}
+              value={userToAdd.name}
+            />
+          </label>
+          <label>
+            bio:
+            <input
+              onChange={e =>
+                setUserToAdd({
+                  ...userToAdd,
+                  bio: e.target.value
+                })
+              }
+              value={userToAdd.bio}
             />
           </label>
           <div className="button-row">
@@ -121,7 +149,6 @@ const UserList = ({ users, updateUsers }) => {
         </form>
       )}
       <div className="spacer" />
-      {/* stretch - build another form here to add a user */}
 
     </div>
   );

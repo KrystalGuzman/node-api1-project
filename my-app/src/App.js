@@ -7,10 +7,10 @@ function App() {
   const [userList, setUserList] = useState([]);
   useEffect(() =>{
     axios
-    .get('http://localhost:5000/api/users')
-    .then(res=>setUserList(res.data))
-    .catch(err=>console.log(err))
-  }, [])
+      .get('http://localhost:5000/api/users')
+      .then(res=>setUserList(res.data))
+      .catch(err=>console.log("stopped here", err))
+    }, [])
   return (
     <UserList users={userList} updateUsers={setUserList} />
   );
