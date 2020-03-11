@@ -23,7 +23,9 @@ const UserList = ({ users, updateUsers }) => {
     axios
       .post('http://localhost:5000/api/users', userToAdd)
       .then(res => {
-        setUserToAdd(res.data)
+        // setUserToAdd(res.data)
+        console.log(res.data);
+        updateUsers(...users, res.data);
         console.log('User Added!');
       })
       .catch(err => console.log(err));

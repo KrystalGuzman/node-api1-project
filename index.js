@@ -14,7 +14,7 @@ res.status(200).json({ hello: 'hello world!'})
 
 server.post('/api/users', (req,res) => {
     const user = req.body;
-    if( user.hasOwnProperty( "name" ) && user.hasOwnProperty("bio")){
+    if( user.name && user.bio){
         user.id = shortid.generate();
         users.push(user);
         res.status(201).json(user);
@@ -27,7 +27,7 @@ server.post('/api/users', (req,res) => {
 
 server.get('/api/users', (req,res) => {
     if (users.length > 0){
-        res.status(500).json(users);
+        res.status(200).json(users);
     } else{
         res.status(500).json({errorMessage: "The users information could not be retrieved."})
     }
